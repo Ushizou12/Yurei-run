@@ -12,7 +12,7 @@ public class Yokai {
 
     @Column(name = "nome_yokai", nullable = false, length = 50)
     private String nome;
-    @Column(name = "descricao_yokai", nullable = false, length = 50)
+    @Column(name = "descricao_yokai", nullable = false, length = 255)
     private String descricao;
     @Column(name = "velocidade_yokai")
     private Double velocidade;
