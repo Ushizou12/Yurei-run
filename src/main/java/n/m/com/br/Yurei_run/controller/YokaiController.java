@@ -2,9 +2,9 @@ package n.m.com.br.Yurei_run.controller;
 
 import n.m.com.br.Yurei_run.model.Yokai;
 import n.m.com.br.Yurei_run.service.YokaiService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,23 +24,33 @@ public class YokaiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Yokai> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<YokaiService> buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id)
-                .map(service -> ResponseEntity.ok(service))
+                .map(yokai -> ResponseEntity.ok(service))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
     @PostMapping
-    public Yokai criar(@RequestBody Yokai yokai){
-        return service.criar(yokai);
+    public ResponseEntity<Yokai> criar(@RequestBody Yokai yokai) {
+        Yokai objetoSalvo = service.criar(yokai);
+        return ResponseEntity.status(HttpStatus.CREATED).body(objetoSalvo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Yokai> atualizar(
-            @PathVariable Long id,
-            @RequestBody @Valid YokaiService service){
-
+    public ResponseEntity<Yokai> atualizar(@PathVariable Long id, @RequestBody Yokai yokai) {
+        service.atualizar(id, yokai);
+        return service.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        // chame service.excluir(id)
+        Boolean deletado = service.excluir(id);
 
+        if (deletado){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

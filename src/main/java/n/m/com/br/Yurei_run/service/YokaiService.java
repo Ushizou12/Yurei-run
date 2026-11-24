@@ -1,5 +1,6 @@
 package n.m.com.br.Yurei_run.service;
 
+import jakarta.transaction.Transactional;
 import n.m.com.br.Yurei_run.model.Yokai;
 import n.m.com.br.Yurei_run.repository.YokaiRepository;
 import org.springframework.stereotype.Service;
@@ -19,20 +20,34 @@ public class YokaiService {
         return yokaiRepository.findAll();
     }
 
-    public Optional<Yokai> buscarPorId(long id){
+    public Optional<Yokai> buscarPorId(Long id){
         return yokaiRepository.findById(id);
     }
 
-    public Yokai criar(Yokai yokai){
-        return yokaiRepository.save(yokai);
+    @Transactional
+    public Yokai criar(Yokai yokai) {
+        yokai.setId(null);
+        yokaiRepository.save(yokai);
+        return null;
     }
 
-    public void excluir(long id){
-        yokaiRepository.deleteById(id);
+    @Transactional
+    public Optional<Yokai> atualizar(Long id, Yokai dadosNovos) {
+        // 1. busque o Yokai existente pelo id
+        if(buscarPorId(id) != null){
+            Yokai dados = dadosNovos;
+            return Optional.of(yokaiRepository.save(dados));
+        }
+        return Optional.empty();
     }
 
-    public Optional<Yokai> atualizar(Yokai yokai){
-        buscarPorId(yokai.getId());
-        return Optional.ofNullable(criar(yokai));
+    @Transactional
+    public boolean excluir(Long id) {
+        // 1. confira se existe (existsById)
+        if(yokaiRepository.existsById(id)){
+            yokaiRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
