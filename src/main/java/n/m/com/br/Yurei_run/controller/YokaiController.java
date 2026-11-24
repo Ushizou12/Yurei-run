@@ -22,4 +22,25 @@ public class YokaiController {
     public List<Yokai> listar() {
         return service.listarTodos();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Yokai> buscarPorId(@PathVariable Long id){
+        return service.buscarPorId(id)
+                .map(service -> ResponseEntity.ok(service))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public Yokai criar(@RequestBody Yokai yokai){
+        return service.criar(yokai);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Yokai> atualizar(
+            @PathVariable Long id,
+            @RequestBody @Valid YokaiService service){
+
+    }
+
+
 }
