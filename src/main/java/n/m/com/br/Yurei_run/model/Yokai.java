@@ -16,8 +16,10 @@ public class Yokai {
     private String descricao;
     @Column(name = "velocidade_yokai")
     private Double velocidade;
+    @Column(name = "sprite_yokai")
     private String sprite;
-    private Boolean ativo;
+    @Column(name = "ativo_yokai", nullable = false)
+    private Boolean ativo = true;
 
     protected Yokai () { }
 
