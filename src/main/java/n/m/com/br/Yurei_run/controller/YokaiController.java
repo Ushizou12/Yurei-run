@@ -24,11 +24,12 @@ public class YokaiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Yokai> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<Yokai> buscarPorId(@PathVariable Long id) {
         return service.buscarPorId(id)
                 .map(yokai -> ResponseEntity.ok(yokai))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @PostMapping
     public ResponseEntity<Yokai> criar(@RequestBody Yokai yokai) {
         Yokai objetoSalvo = service.criar(yokai);
@@ -45,7 +46,7 @@ public class YokaiController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         boolean deletado = service.excluir(id);
-        if (deletado){
+        if (deletado) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
