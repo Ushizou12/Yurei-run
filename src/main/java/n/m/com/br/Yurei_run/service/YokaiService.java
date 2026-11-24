@@ -1,9 +1,10 @@
 package n.m.com.br.Yurei_run.service;
 
-import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityNotFoundException;
 import n.m.com.br.Yurei_run.model.Yokai;
 import n.m.com.br.Yurei_run.repository.YokaiRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,24 +27,24 @@ public class YokaiService {
 
     @Transactional
     public Yokai criar(Yokai yokai) {
-        yokai.setId(null);
-        yokaiRepository.save(yokai);
-        return null;
+        return yokaiRepository.save(yokai);
     }
 
     @Transactional
     public Optional<Yokai> atualizar(Long id, Yokai dadosNovos) {
-        // 1. busque o Yokai existente pelo id
-        if(buscarPorId(id) != null){
-            Yokai dados = dadosNovos;
-            return Optional.of(yokaiRepository.save(dados));
-        }
-        return Optional.empty();
+
+            return buscarPorId(id).map(existente -> {
+                existente.setNome(dadosNovos.getNome());
+                existente.setDescricao(dadosNovos.getDescricao());
+                existente.setVelocidade(dadosNovos.getVelocidade());
+                existente.setAtivo(dadosNovos.getAtivo());
+
+                return yokaiRepository.save(existente);
+        });
     }
 
     @Transactional
     public boolean excluir(Long id) {
-        // 1. confira se existe (existsById)
         if(yokaiRepository.existsById(id)){
             yokaiRepository.deleteById(id);
             return true;
