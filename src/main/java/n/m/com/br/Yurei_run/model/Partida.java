@@ -11,7 +11,7 @@ public class Partida {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer distância;
+    private Integer distancia;
     private LocalDateTime data;
 
     @ManyToOne
@@ -28,12 +28,12 @@ public class Partida {
         this.id = id;
     }
 
-    public Integer getDistância() {
-        return distância;
+    public Integer getDistancia() {
+        return distancia;
     }
 
-    public void setDistância(Integer distância) {
-        this.distância = distância;
+    public void setDistancia(Integer distancia) {
+        this.distancia = distancia;
     }
 
     public LocalDateTime getData() {
