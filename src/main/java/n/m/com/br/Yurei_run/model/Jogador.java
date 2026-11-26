@@ -12,6 +12,8 @@ public class Jogador {
 
     @Column(unique = true, nullable = false)
     private String nickname;
+    private Integer melhorScore;
+    private Integer moedas;
 
     public Jogador () {}
 
@@ -29,5 +31,21 @@ public class Jogador {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public Integer getMelhorScore() {
+        return melhorScore;
+    }
+
+    public void setMelhorScore(Integer melhorScore) {
+        this.melhorScore = melhorScore;
+    }
+
+    public Integer getMoedas() {
+        return moedas;
+    }
+
+    public void setMoedas(Integer moedas) {
+        this.moedas = moedas;
     }
 }
