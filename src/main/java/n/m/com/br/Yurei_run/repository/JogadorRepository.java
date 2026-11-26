@@ -1,7 +1,6 @@
 package n.m.com.br.Yurei_run.repository;
 
 import n.m.com.br.Yurei_run.model.Jogador;
-import n.m.com.br.Yurei_run.model.Yokai;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,7 +1,5 @@
 package n.m.com.br.Yurei_run.service;
 
-import n.m.com.br.Yurei_run.model.Yokai;
-import n.m.com.br.Yurei_run.repository.YokaiRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
