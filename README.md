@@ -11,7 +11,7 @@ O jogo é feito em **Godot** e se comunica com uma aplicação **Java Spring Boo
 ## Integrantes
 
 - Nicolas Paulo Portulan de Araujo
-- [A CONFIRMAR: nome do segundo integrante]
+- Matheus Nascimento Evangelista
 
 ## Arquitetura
 
