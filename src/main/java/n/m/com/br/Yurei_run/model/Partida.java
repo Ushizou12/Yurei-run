@@ -1,8 +1,11 @@
 package n.m.com.br.Yurei_run.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "tb_partida")
 public class Partida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

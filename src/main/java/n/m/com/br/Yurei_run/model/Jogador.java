@@ -1,5 +1,7 @@
 package n.m.com.br.Yurei_run.model;
 
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "tb_jogador")
 public class Jogador {
@@ -8,7 +10,7 @@ public class Jogador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Collumn(unique = true)
+    @Column(unique = true)
     private String nickname;
 
     protected Jogador () {}
