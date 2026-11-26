@@ -11,7 +11,7 @@ public class Jogador {
     @Collumn(unique = true)
     private String nickname;
 
-    protected Jogador() {}
+    protected Jogador () {}
 
     public Long getId() {
         return id;
