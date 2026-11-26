@@ -13,7 +13,7 @@ public class Jogador {
     @Column(unique = true, nullable = false)
     private String nickname;
 
-    protected Jogador () {}
+    public Jogador () {}
 
     public Long getId() {
         return id;

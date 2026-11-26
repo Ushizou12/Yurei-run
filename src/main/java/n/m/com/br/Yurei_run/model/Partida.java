@@ -11,14 +11,14 @@ public class Partida {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int segundos;
+    private Integer distância;
     private LocalDateTime data;
 
     @ManyToOne
     @JoinColumn(name = "jogador_id", nullable = false)
     private Jogador jogador;
 
-    protected Partida () {}
+    public Partida () {}
 
     public Long getId() {
         return id;
@@ -28,12 +28,12 @@ public class Partida {
         this.id = id;
     }
 
-    public int getSegundos() {
-        return segundos;
+    public Integer getDistância() {
+        return distância;
     }
 
-    public void setSegundos(int segundos) {
-        this.segundos = segundos;
+    public void setDistância(Integer distância) {
+        this.distância = distância;
     }
 
     public LocalDateTime getData() {
