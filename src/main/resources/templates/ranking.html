@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ranking - Yurei Run</title>
+</head>
+<body>
+
+<h1>Ranking Yurei Run</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Jogador</th>
+        <th>Melhor pontuação</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="jogador : ${ranking}">
+        <td th:text="${jogador.nickname}"></td>
+        <td th:text="${jogador.melhorScore}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -19,7 +19,6 @@ public class RankingWebController {
 
     @GetMapping
     public String top10(Model model) {
-        jogadorService.ranking();
         model.addAttribute("ranking", jogadorService.ranking());
         return "ranking";
     }
