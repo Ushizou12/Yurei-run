@@ -20,8 +20,9 @@ public class PartidaController {
     }
 
     @PostMapping
-    public ResponseEntity<Optional<ResultadoPartida>> registrar(@RequestBody PartidaRequest request){
-        Optional<ResultadoPartida> resultado = partidaService.registrar(request.jogadorId(), request.distancia());
-        return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
+    public ResponseEntity<ResultadoPartida> registrar(@RequestBody PartidaRequest request){
+        return partidaService.registrar(request.jogadorId(), request.distancia())
+                .map(r -> ResponseEntity.status(HttpStatus.CREATED).body(r))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

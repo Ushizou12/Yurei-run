@@ -20,7 +20,7 @@ public class PartidaService {
     private final Integer razaoMoedas;
 
     public PartidaService(JogadorRepository jogadorRepository,PartidaRepository partidaRepository,
-            @Value("${app.moedas.razao}") Integer razaoMoedas) {
+            @Value("${app.moedas.razao:10}") Integer razaoMoedas) {
         this.jogadorRepository = jogadorRepository;
         this.partidaRepository = partidaRepository;
         this.razaoMoedas = razaoMoedas;
@@ -30,6 +30,10 @@ public class PartidaService {
     public Optional<ResultadoPartida> registrar(Long jogadorId, Integer distancia) {
         if (distancia == null || distancia < 0) {
             throw new IllegalArgumentException("A distância não pode ser nula ou negativa.");
+        }
+
+        if (jogadorId == null || jogadorId <= 0) {
+            return Optional.empty();
         }
 
         Optional<Jogador> jogadorOpt = jogadorRepository.findById(jogadorId);
@@ -54,11 +58,9 @@ public class PartidaService {
         int saldoAtual = jogador.getMoedas() != null ? jogador.getMoedas() : 0;
         jogador.setMoedas(saldoAtual + moedasGanhas);
 
-        boolean novoRecorde = false;
-        Integer melhorScoreAtual =+ jogador.getMelhorScore();
-
-        if(melhorScoreAtual > melhorScore) {
-            novoRecorde = true;
+        boolean novoRecorde = melhorScore == null || distancia > melhorScore;
+        if (novoRecorde) {
+            jogador.setMelhorScore(distancia);
         }
 
         return Optional.of(new ResultadoPartida(

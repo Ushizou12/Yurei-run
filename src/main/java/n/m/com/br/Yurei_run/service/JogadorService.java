@@ -18,12 +18,16 @@ public class JogadorService {
     @Transactional
     public Jogador acharOuCriar(String nickname){
 
+        if(nickname==null || nickname.isBlank()){
+            throw new IllegalArgumentException("O nickname não pode ser vazio.");
+        }
+
         String nicknameLimpo = nickname.trim();
 
         return jogadorRepository.findByNickname(nicknameLimpo)
                 .orElseGet(() -> {
                     Jogador novojogador = new Jogador();
-                    novojogador.setNickname(nickname);
+                    novojogador.setNickname(nicknameLimpo);
                     novojogador.setMelhorScore(0);
                     novojogador.setMoedas(0);
                     return jogadorRepository.save(novojogador);
@@ -31,6 +35,6 @@ public class JogadorService {
     }
 
     public List<Jogador> ranking(){
-        return jogadorRepository.findAll();
+        return jogadorRepository.findTop10ByMelhorScoreIsNotNullOrderByMelhorScoreDesc();
     }
 }
