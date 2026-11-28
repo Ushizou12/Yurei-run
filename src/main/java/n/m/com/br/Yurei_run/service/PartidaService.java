@@ -50,9 +50,6 @@ public class PartidaService {
         partidaRepository.save(partida);
 
         Integer melhorScore = jogador.getMelhorScore();
-        if (melhorScore == null || melhorScore < distancia) {
-            jogador.setMelhorScore(distancia);
-        }
 
         int moedasGanhas = distancia / razaoMoedas;
         int saldoAtual = jogador.getMoedas() != null ? jogador.getMoedas() : 0;

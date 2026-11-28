@@ -1,6 +1,9 @@
 package n.m.com.br.Yurei_run.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "tb_skin")
@@ -10,11 +13,15 @@ public class Skin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(unique = true, nullable = false)
     private String nome;
+    @NotNull
+    @PositiveOrZero
     private Integer preco;
+    @NotBlank
     private String sprite;
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     public Skin() {}
 

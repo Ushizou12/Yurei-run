@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RankingWebController {
     // construtor recebendo o JogadorService (igual ao que você já faz)
 
-    JogadorService jogadorService;
+    private final JogadorService jogadorService;
 
     public RankingWebController(JogadorService jogadorService) {
         this.jogadorService = jogadorService;
